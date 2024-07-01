@@ -55,8 +55,9 @@ background: linear-gradient(90deg, rgba(207,23,23,1) 0%, rgba(185,26,26,1) 9%, r
 * Created with https://www.css-gradient.com
 * Gradient link: https://www.css-gradient.com/?c1=ff213c&c2=ffc501&gt=c&gd=dtr
 */
-background: rgba(255, 33, 60, 1.0);
-background: conic-gradient(from 45deg, rgba(255, 33, 60, 1.0), rgba(255, 197, 1, 0.6));
+/* background: rgba(255, 33, 60, 1.0);
+background: conic-gradient(from 45deg, rgba(255, 33, 60, 1.0), rgba(255, 197, 1, 0.6)); */
+background: conic-gradient(from 45deg, #d83803, #b00a0a); */
 
 }
 
@@ -304,7 +305,7 @@ a {
     position: relative;
     padding: 4px;
     width: 230px;
-    height: 134px;
+    height: 133px;
     margin-bottom: 15px;
     overflow: hidden;
     border-radius: 100%;
@@ -441,13 +442,13 @@ a {
     left: 0;
     right: 0;
     height: 1rem;
-    background: #000000;
+    background: #b00a0a;
     filter: url("#blob");
   }
   #foot .footer .bubbles .bubble {
     position: absolute;
     left: var(--position, 50%);
-    background: #434343;
+    background: #d83803;
     border-radius: 100%;
     -webkit-animation: bubble-size var(--time, 2s) ease-in infinite var(--delay, 0s), bubble-move var(--time, 2s) ease-in infinite var(--delay, 0s);
             animation: bubble-size var(--time, 2s) ease-in infinite var(--delay, 0s), bubble-move var(--time, 2s) ease-in infinite var(--delay, 0s);
@@ -459,7 +460,7 @@ a {
     grid-template-columns: 1fr auto;
     grid-gap: 4rem;
     padding: 2rem;
-    background: linear-gradient(to top, #000000, #434343);
+    background: linear-gradient(to top, #b00a0a, #d83803);
   }
   #foot .footer .content a, #foot .footer .content p {
     color: #F5F7FA;
@@ -535,6 +536,6 @@ a {
   .heading.check {
     place-self: center;
     position: absolute;
-    bottom: -1485px;
+    /* bottom: -1485px; */
     z-index: 99999999999;
   }
