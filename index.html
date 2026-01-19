@@ -2,808 +2,970 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memecoin</title>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Genos:ital,wght@1,500&display=swap");
-    @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,100,0,-25");
-  </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idek</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+NSW:wght@100..400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Playwrite AU NSW", cursive;
+            font-optical-sizing: auto;
+            font-weight: bold;
+            font-style: normal;
+        }
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.0/paper-full.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <style>
-    body{
-      cursor: none;
-    }
-    canvas {
-      width: 99%;
-      height: 300%;
-      pointer-events: none;
-      z-index: 1;
-      background-color: transparent;
-      position: absolute;
-      top: 0;
-      opacity: .5;
-      -webkit-user-drag: none;
-      user-select: none;
-      -webkit-tap-highlight-color:
-        rgba(0, 0, 0, 0);
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .fire {
-  animation: burn 1.5s linear infinite alternate;
-}
+        body {
+            overscroll-behavior: none;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: gold;
+        }
 
-@keyframes burn {
-  from { text-shadow: -.1em 0 .3em #fefcc9, .1em -.1em .3em #feec85, -.2em -.2em .4em #ffae34, .2em -.3em .3em #ec760c, -.2em -.4em .4em #cd4606, .1em -.5em .7em #973716, .1em -.7em .7em #451b0e; }
-  45%  { text-shadow: .1em -.2em .5em #fefcc9, .15em 0 .4em #feec85, -.1em -.25em .5em #ffae34, .15em -.45em .5em #ec760c, -.1em -.5em .6em #cd4606, 0 -.8em .6em #973716, .2em -1em .8em #451b0e; }
-  70%  { text-shadow: -.1em 0 .3em #fefcc9, .1em -.1em .3em #feec85, -.2em -.2em .6em #ffae34, .2em -.3em .4em #ec760c, -.2em -.4em .7em #cd4606, .1em -.5em .7em #973716, .1em -.7em .9em #451b0e; }
-  to   { text-shadow: -.1em -.2em .6em #fefcc9, -.15em 0 .6em #feec85, .1em -.25em .6em #ffae34, -.15em -.45em .5em #ec760c, .1em -.5em .6em #cd4606, 0 -.8em .6em #973716, -.2em -1em .8em #451b0e; }
-}
+        section {
+            background-color: gold;
+        }
 
-a:hover{
-  cursor: pointer;
-}
+        .hero {
+            height: 100vh;
+        }
 
-i {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: red;
-  pointer-events: none;
-  animation: animate 2s linear forwards;
-}
+        .hero__inner {
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+        }
 
-@keyframes animate {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--x), var(--y));
-  }
-}
+        .hero__image-cont {
+            position: relative;
+            overflow: hidden;
+        }
 
-  </style>
+        .hero__image-cont:not(:last-child):after {
+            content: "";
+            position: absolute;
+            right: 0px;
+            background-color: #111111;
+            height: 100%;
+            top: 0;
+            width: 2.5px;
+            z-index: 999;
+        }
+
+        .hero__image-cont img,
+        .hero__image-cont .anim-swipe {
+            position: absolute;
+            width: 700%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+        }
+
+        .hero .anim-swipe {
+            width: 100%;
+            background-color: #111111;
+        }
+
+        .hero__image-cont:nth-child(1) img {
+            left: -100%;
+        }
+
+        .hero__image-cont:nth-child(2) img {
+            left: -200%;
+        }
+
+        .hero__image-cont:nth-child(3) img {
+            left: -300%;
+        }
+
+        .hero__image-cont:nth-child(4) img {
+            left: -400%;
+        }
+
+        .hero__image-cont:nth-child(5) img {
+            left: -500%;
+        }
+
+        .hero__image-cont:nth-child(6) img {
+            left: -600%;
+        }
+
+        .spacer {
+            height: 30vh;
+        }
+
+        .scroll {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+        }
+
+
+
+        #smile {
+            text-align: center;
+            font-size: 50px;
+        }
+
+
+
+
+
+
+
+
+        .face {
+            aspect-ratio: 1/1;
+            background-color: rgb(255, 208, 19);
+            border: 2.4vmin solid black;
+            border-radius: 50%;
+            left: 50%;
+            position: relative;
+            top: 22%;
+            transform: translate(-50%);
+            width: 60vmin;
+        }
+
+        .eye {
+            aspect-ratio: 1 / 1.2;
+            background-color: black;
+            border-radius: 50%;
+            position: fixed;
+            top: 24%;
+            transition: background-color 2s;
+            width: 10vmin;
+            z-index: 10;
+        }
+
+        .lefteye {
+            left: 18%;
+        }
+
+        .righteye {
+            right: 18%;
+        }
+
+        .eyewhite {
+            aspect-ratio: 1/1.2;
+            background-color: rgb(255, 244, 200);
+            border-radius: 50%;
+            position: fixed;
+            top: 28%;
+            transform: rotate(10deg);
+            width: 3.6vmin;
+            z-index: 20;
+        }
+
+        .eyewhite-left {
+            left: 21%;
+            opacity: 0;
+        }
+
+        .eyewhite-right {
+            opacity: 0;
+            right: 25.6%;
+        }
+
+        .smile {
+            aspect-ratio: 1/1;
+            background-color: rgb(255, 208, 19);
+            border-bottom: 2.4vmin solid black;
+            border-bottom-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+            left: 50%;
+            opacity: 0;
+            position: fixed;
+            top: 45%;
+            transform: translate(-50%, -50%);
+            width: 40vmin;
+            z-index: 5;
+        }
+
+        .bigsmile {
+            background-color: rgb(46, 46, 46);
+            border-radius: 50%;
+            height: 0.4vmin;
+            opacity: 0;
+            position: fixed;
+            top: 63%;
+            transition: 0.5s;
+            width: 4vmin;
+            z-index: 30;
+        }
+
+        .bigsmile-left {
+            left: 16.5%;
+            transform: rotate(-46deg);
+        }
+
+        .bigsmile-right {
+            right: 16.5%;
+            transform: rotate(46deg);
+        }
+
+        .smilecover {
+            background-color: rgb(255, 208, 19);
+            border-radius: 50%;
+            height: 32vmin;
+            left: 50%;
+            position: fixed;
+            top: 15%;
+            transform: translate(-50%);
+            width: 52.6vmin;
+            z-index: 7;
+        }
+
+        .nosmile {
+            background-color: rgb(0, 0, 0);
+            border-radius: 30%;
+            height: 2vmin;
+            left: 50%;
+            position: fixed;
+            top: 76.5%;
+            transform: translate(-20%) rotate(-7deg);
+            transition: 0.4s;
+            width: 8vmin;
+        }
+
+        .back-link {
+            background-color: transparent;
+            border-radius: 1em;
+            bottom: 2vh;
+            color: rgb(255, 85, 23);
+            cursor: unset;
+            display: inline-block;
+            font-size: clamp(26px, 5vw, 36px);
+            right: -200vw;
+            letter-spacing: 2px;
+            line-height: 80%;
+            margin: 0 0 0.5em 0;
+            max-width: 80vw;
+            opacity: 0;
+            padding: 0 0.3em;
+            position: fixed;
+            text-decoration: none;
+            transition: 1s;
+        }
+
+
+        /* neon btn */
+
+        .button1 {
+            height: 80px;
+            width: 280px;
+            font-size: 10px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #1a1a1a, #2d2d2d, #1a1a1a);
+            background-size: 200% 200%;
+            border: 3px solid transparent;
+            border-radius: 50px;
+            margin: 0px auto 0 auto;
+            display: block;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow:
+                0 0 20px rgba(255, 215, 0, 0.3),
+                0 0 40px rgba(255, 215, 0, 0.2),
+                0 0 60px rgba(255, 215, 0, 0.1),
+                inset 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .button1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .button1::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .button1:hover {
+            transform: translateY(-5px) scale(1.05);
+            background-position: 100% 100%;
+            color: #fff;
+            text-shadow: 0 0 20px #fff, 0 0 30px #ffd700;
+            box-shadow:
+                0 10px 30px rgba(255, 215, 0, 0.4),
+                0 20px 50px rgba(255, 215, 0, 0.3),
+                0 30px 70px rgba(255, 215, 0, 0.2),
+                inset 0 0 30px rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+        }
+
+        .button1:hover::before {
+            left: 100%;
+        }
+
+        .button1:hover::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        .button1:active {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow:
+                0 5px 15px rgba(255, 215, 0, 0.5),
+                0 10px 25px rgba(255, 215, 0, 0.4),
+                inset 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* social icons */
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .cube {
+            width: 60px;
+            height: 60px;
+            background: gold;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .plus-vertical,
+        .plus-horizontal {
+            background: #fff;
+            border-radius: 4px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .plus-vertical {
+            height: 50%;
+            width: 5px;
+        }
+
+        .plus-horizontal {
+            width: 50%;
+            height: 5px;
+        }
+
+        .quadrant {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .quadrant__item {
+            width: 50%;
+            height: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: khaki;
+            border-radius: 6px;
+            position: relative;
+        }
+
+
+        .quadrant__item__content {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quadrant__item:hover {
+            color: white;
+            background: gold;
+        }
+
+
+        .arrow-down,
+        .arrow-left,
+        .arrow-right,
+        .arrow-up {
+            opacity: 0;
+        }
+
+        .arrow-up {
+            transform: translateY(10px);
+        }
+
+        .arrow-down {
+            transform: translateY(-10px);
+        }
+
+        .arrow-left {
+            transform: translateX(10px);
+        }
+
+        .arrow-right {
+            transform: translateX(-10px);
+        }
+
+        p {
+            font-size: 14px;
+            color: gray;
+            position: relative;
+            bottom: 1em;
+            left: 1em;
+            margin: 0;
+        }
+
+        p span {
+            font-size: 36px;
+            font-weight: 900;
+            line-height: 100%;
+        }
+
+        .follower {
+            font-size: 36px;
+            line-height: 100%;
+            border-radius: 50%;
+            margin: .15em;
+            display: inline-block;
+            position: relative;
+            transition: .75s;
+            user-select: none;
+            text-shadow: 0 0 5px black;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .hero__inner {
+                height: 80%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <div id="main_container" @wheel="handleWheel">
 
-    <!-- <svg id="svg_filters_container" width="100%" height="100%">
-          <filter id="turbulence1" x="0" y="0" width="100%" height="100%">
-            <feTurbulence
-              id="turbulence-filter1"
-              :baseFrequency="`0`"
-              numOctaves="1"
-              seed="0"
-              stitchTiles="noStitch"
-            />
-            <feDisplacementMap
-              in="SourceGraphic"
-              :scale="25"
-            />
-          </filter>
-        </svg> -->
+    <div style="display: block; position: relative;" id="opening">
+        <div id="opening-img">
 
-    <div id="header_wrapper">
-      <div id="header_filter_part" :style="opacity: 1000"></div>
+            <section style="height: 20vh;"></section>
 
-      <div id="header_border_part" :style="`background: 
-                        linear-gradient(93deg,
-                            rgba(128, 0, 32, 4) 0%,
-                            transparent 95%
-                        );
-                        mask: linear-gradient(138deg,
-                            white 50%,
-                            transparent 20%
-                        );
-                    ;`"></div>
-
-      <div id="header_content_part" :style="opacity: 90" class="p-4 ">
-        <div id="logo" class="">
-          <a target="_blank" href="https://dexscreener.com"><img style="border-radius: 37%; margin-left: 5px;" width="150px" height="100px" src="wiflogo.png" alt=""></a>
-        </div>
-        <div id="buttons" class="mb-8 ml-20 sm:ml-0">
-          <div class="header_button ml-6 sm:ml-0">
-            <!-- <span id="top_symbol" class="material-symbols-outlined">star</span> -->
-            <a target="_blank" href="#"><img class="rounded-full" src="dex.png" width="50" height="50" alt=""></a>
-          </div>
-          <div class="header_button">
-            <a target="_blank" href="https://x.com/flamingwifsol"><img class="rounded-full" src="x-round.svg" width="78" height="50" alt=""></a>
-          </div>
-          <div class="header_button">
-            <a target="_blank" href="#"><img class="rounded-full" src="pump.jpg" width="50" height="50" alt=""></a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <canvas id="canvas" class="hidden sm:block">
-
-    </canvas>
-
-    <div class="flex flex-col  justify-center items-center fire">
-      <h1 style="color: antiquewhite; letter-spacing: 12px;" class="font-extrabold text-3xl text-white p-8">FLAMING WIF</h1>
-      <img src="smokewif.gif" width="400" height="100" class="rounded-full p-6" alt="">
-
-      <div class="p-12">
-        <!-- <button class="font-extrabold text-3xl p-8 border-white">Buy Here</button> -->
-        <button class="font-extrabold">
-
-        </button>
-      </div>
-    </div>
-
-
-    <div id="next-section" class="flex flex-col justify-center items-center">
-      <div class="sm:flex sm:flex-row place-content-center p-36 space-x-8">
-        <img class="rounded-lg" src="wif(2)(1)(3).png" height="300" width="600" alt="">
-        <h1 style="line-height: 80px;"
-          class="text-white text-3xl font-extrabold capitalize  sm:w-1/4 mt-8 sm:mt-0 text-center text-wrap font-bold">
-          The angry big dawg is launching on the solana blockchain.
-        </h1>
-      </div>
-      <div class="w-1/4">
-      </div>
-
-    </div>
-
-    <div id="meet-the-brothers" class="place-items-center">
-      <div class="slider fire">
-        <div class="swiper people__slide">
-          <div class="swiper-wrapper sm:flex flex-row">
-            <div class="swiper-slide">
-              <div class="people__card">
-                <div class="people__image">
-                  <img src="wif(2)(1)(5).png" alt="">
-                </div>
-                <div class="people__info">
-                  <ul class="people__social">
-                    <li><a target="_blank" href=""><i class="fa-brands fa-facebook-f"></i></a></li>
-                    <li><a target="_blank" href=""><i class="fa-brands fa-twitter"></i></a></li>
-                    <li><a target="_blank" href=""><i class="fa-brands fa-linkedin-in"></i></a></li>
-                  </ul>
-                  <h3 class="people__name font-extrabold text-4xl">SEEING RED!!!</h3>
-                  <!-- <p class="people__desc text-3xl font-bold capitalize">He's Shy and timid, Cant speak in public to save his life</p> -->
-                </div>
-                <div class="people__btn mt-4">
-                  <!-- <a target="_blank" href="" class="font-bold">Buy Here</a> -->
-                </div>
-              </div>
+            <div class="face">
+                <div class="eye lefteye"></div>
+                <div class="eye righteye"></div>
+                <div class="eyewhite eyewhite-left"></div>
+                <div class="eyewhite eyewhite-right"></div>
+                <div class="smile"></div>
+                <div class="bigsmile bigsmile-left"></div>
+                <div class="bigsmile bigsmile-right"></div>
+                <div class="smilecover"></div>
+                <div class="nosmile"></div>
             </div>
-            <div class="swiper-slide">
-              <div class="people__card">
-                <div class="people__image">
-                  <img src="wif(2)(1)(4).png" alt="">
+
+            <!-- <section class="spacer"></section> -->
+
+            <section id="start" style="text-align: center;">
+                <div class="text">
+                    <h1>ALWAYS REMEMBER TO SMILE</h1>
                 </div>
-                <div class="people__info">
-                  <ul class="people__social">
-                    <li><a target="_blank" href=""><i class="fa-brands fa-facebook-f"></i></a></li>
-                    <li><a target="_blank" href=""><i class="fa-brands fa-twitter"></i></a></li>
-                    <li><a target="_blank" href=""><i class="fa-brands fa-linkedin-in"></i></a></li>
-                  </ul>
-                  <h3 class="people__name font-extrabold text-center text-4xl">I'M ABOUT TO ERUPT</h3>
-                  <!-- <p class="people__desc text-3xl font-bold capitalize">Level Headed and Observant, He's the smart one in the bunch.</p> -->
+            </section>
+
+            <section class="spacer"></section>
+            <section class="spacer"></section>
+            <section class="spacer"></section>
+
+
+            <section class="hero">
+                <div class="hero__inner constrain">
+                    <div class="hero__image-cont">
+                        <img src="smile.jpg" />
+                        <div class="anim-swipe"></div>
+                    </div>
+                    <div class="hero__image-cont">
+                        <img src="smile.jpg" />
+                        <div class="anim-swipe"></div>
+                    </div>
+                    <div class="hero__image-cont">
+                        <img src="smile.jpg" />
+                        <div class="anim-swipe"></div>
+                    </div>
+                    <div class="hero__image-cont">
+                        <img src="smile.jpg" />
+                        <div class="anim-swipe"></div>
+                    </div>
+                    <div class="hero__image-cont">
+                        <img src="smile.jpg" />
+                        <div class="anim-swipe"></div>
+                    </div>
+                    <div class="hero__image-cont">
+                        <img src="smile.jpg" />
+                        <div class="anim-swipe"></div>
+                    </div>
                 </div>
-                <div class="people__btn">
-                  <!-- <a target="_blank" href="" class="font-bold mt-3">Buy Here</a> -->
+            </section>
+
+            <section class="spacer"></section>
+            <section class="spacer"></section>
+
+            <section style="padding: 10px; height: 50vh;">
+                <div>
+                    <button class="button1 btn btn-neon">Click/Hold To Get a Smile</button>
+
+                    <div id="smile-grid"
+                        style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 20px; max-width: 400px; margin-left: auto; margin-right: auto;">
+                    </div>
                 </div>
-              </div>
+            </section>
+
+            <!-- <section class="spacer"></section> -->
+
+            <div style="padding: 50px;" class="faces"></div>
+
+            <section class="spacer"></section>
+
+
+
+            <div class="container">
+                <div class="cube">
+                    <div class="plus">
+                        <div class="plus-horizontal"></div>
+                        <div class="plus-vertical"></div>
+                    </div>
+                    <div class="quadrant">
+                        <div class="quadrant__item">
+                            <a href="#" onclick="document.body.scrollTop=0;document.documentElement.scrollTop=0;event.preventDefault()">
+                            <div class="quadrant__item__content">
+                                <svg width="113px" height="113px" viewBox="-6 -6 37.00 37.00" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 13.8599L10.87 10.8C11.0125 10.6416 11.1868 10.5149 11.3815 10.4282C11.5761 10.3415 11.7869 10.2966 12 10.2966C12.2131 10.2966 12.4239 10.3415 12.6185 10.4282C12.8132 10.5149 12.9875 10.6416 13.13 10.8L16 13.8599" stroke="#000000" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 7.41992L3 17.4199C3 19.6291 4.79086 21.4199 7 21.4199H17C19.2091 21.4199 21 19.6291 21 17.4199V7.41992C21 5.21078 19.2091 3.41992 17 3.41992H7C4.79086 3.41992 3 5.21078 3 7.41992Z" stroke="#000000" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> 
+                            </div></a>
+                        </div>
+
+                        <div class="quadrant__item">
+                            <div class="quadrant__item__content">
+                                <a target="_blank" href="x.com">
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30"
+                                        viewBox="0 0 50 50">
+                                        <path
+                                            d="M 5.9199219 6 L 20.582031 27.375 L 6.2304688 44 L 9.4101562 44 L 21.986328 29.421875 L 31.986328 44 L 44 44 L 28.681641 21.669922 L 42.199219 6 L 39.029297 6 L 27.275391 19.617188 L 17.933594 6 L 5.9199219 6 z M 9.7167969 8 L 16.880859 8 L 40.203125 42 L 33.039062 42 L 9.7167969 8 z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        </a>
+
+                        <div class="quadrant__item">
+                            <div class="quadrant__item__content">
+                                <a target="_blank" href="dexscreener.com">
+
+                                    <img style="filter: invert(); opacity: 0.8;" src="dex-screener-seeklogo.svg"
+                                        style="border-radius: 15px;" height="30" width="40" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        </a>
+                        <div class="quadrant__item">
+                            <div class="quadrant__item__content">
+
+                                <a target="_blank" href="x.com/comm"> <img src="community.png" height="30" width="30" alt=""> </a>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="swiper-slide">
-              <div class="people__card">
-                <div class="people__image">
-                  <img src="wif(2)(1)(7).png" alt="">
-                </div>
-                <div class="people__info">
-                  <ul class="people__social">
-                    <li><a target="_blank" href=""><i class="fa-brands fa-facebook-f"></i></a></li>
-                    <li><a target="_blank" href=""><i class="fa-brands fa-twitter"></i></a></li>
-                    <li><a target="_blank" href=""><i class="fa-brands fa-linkedin-in"></i></a></li>
-                  </ul>
-                  <h3 class="people__name font-extrabold text-4xl">TO THE MOON</h3>
-                  <!-- <p class="people__desc text-3xl font-bold capitalize">TO THE MOON</p> -->
-                </div>
-                <div class="people__btn">
-                  <!-- <a target="_blank" href="" class="font-bold mt-4">Buy Here</a> -->
-                </div>
-              </div>
-            </div>
-          </div>
+
+            <section style="height: 8vh;"></section>
+            <!-- <section class="spacer"></section> -->
+
+
+
+
         </div>
-      </div>
     </div>
-
-    
-    <section style="background-color: #eae6e0;" class="border-2 sm:border-4 fire border-black p-4 text-black text-center font-extrabold sm:text-3xl" >
-      CA: xxxxxxxxxxxxxxxxxxxxxxxxxx
-    </section>
-
-
-    <footer id="foot">
-      <div class="heading">
-        <div class="flex flex-row justify-center items-center space-x-8 mb-24">
-          <!-- <img src="x.svg" class="rounded-full p-4 " width="70" height="40" alt="">
-                    <img src="pump.jpg" class="rounded-full p-4 " width="70" height="40" alt="">
-                    <img src="dex.png" class="rounded-full p-4 " width="70" height="40" alt="">
-                    <img src="1.jpg" class="rounded-full p-4 " width="70" height="40" alt=""> -->
-        </div>
-      </div>
-      <div class="main"></div>
-      <div class="footer">
-        <div class="bubbles">
-          <div class="bubble"
-            style="--size:2.1770300454171423rem; --distance:8.928260237755076rem; --position:87.36803938981409%; --time:2.1225703677045447s; --delay:-2.938999564816639s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.810938962553985rem; --distance:8.592904534462376rem; --position:63.73700550362203%; --time:2.1031044043811065s; --delay:-2.9850511372666624s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.7972269060654815rem; --distance:6.224149710117595rem; --position:36.52342115516733%; --time:2.6162979901726415s; --delay:-3.798636146332212s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.154785575717888rem; --distance:6.675318965525054rem; --position:83.60219094982125%; --time:2.8823255997279498s; --delay:-2.1425642194091767s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.813244742832524rem; --distance:6.789631643759802rem; --position:48.68409486037254%; --time:2.0540028294231747s; --delay:-3.9622272264239116s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.538130819237763rem; --distance:6.478542342742106rem; --position:31.863702852833264%; --time:2.60305166836089s; --delay:-3.252106600206364s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.331937894776433rem; --distance:9.898182652894961rem; --position:64.75713980978529%; --time:3.5169977183069894s; --delay:-2.3392081960334776s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.4568271422396286rem; --distance:6.057814221630287rem; --position:18.763590805959765%; --time:3.4748829679674222s; --delay:-3.0459032192791353s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.621560392780523rem; --distance:6.038602889281843rem; --position:87.93950606831649%; --time:3.357129923554815s; --delay:-3.536848948608304s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.6522417082412977rem; --distance:9.922802131668655rem; --position:15.297315293446413%; --time:2.4023318060645242s; --delay:-3.371312308839975s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.474097137684324rem; --distance:8.52504745180098rem; --position:1.3055793902737882%; --time:3.3849478051540824s; --delay:-2.184545197022847s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.9442537328295995rem; --distance:9.631834871356775rem; --position:64.0918755750417%; --time:3.0159069995181156s; --delay:-2.4126737323276197s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.1387066808204374rem; --distance:7.828002946078919rem; --position:25.722924842578816%; --time:2.8960438387571483s; --delay:-2.4937031362207005s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.4493460976667185rem; --distance:8.698027520207411rem; --position:52.048246875964146%; --time:3.3205143226613867s; --delay:-3.846007527358731s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.4585415573672167rem; --distance:7.4541176185120115rem; --position:89.70271076084427%; --time:2.106067311854445s; --delay:-3.7844110034139744s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.7174139099543515rem; --distance:9.369693693039242rem; --position:90.87049467060051%; --time:2.1644816675446084s; --delay:-2.507196078993529s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.8215147880103197rem; --distance:7.188198051969879rem; --position:99.89408895924953%; --time:3.2564711801342465s; --delay:-3.924498471068269s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.6588598427702674rem; --distance:7.536948200563554rem; --position:94.33826003596246%; --time:2.1243039468382348s; --delay:-2.3665716109589017s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.216839397109717rem; --distance:9.786776455715708rem; --position:84.12308823827354%; --time:3.5542466600998437s; --delay:-2.781809670422116s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.755010282050446rem; --distance:6.675642370229613rem; --position:32.72565966018307%; --time:2.3450771131127888s; --delay:-2.9103245878451154s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.974710417558163rem; --distance:8.474236646184242rem; --position:64.534532526077%; --time:2.5306843485737534s; --delay:-2.222736834303945s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.187510049784139rem; --distance:9.09024695542924rem; --position:-1.685060119186641%; --time:2.4079487233235692s; --delay:-3.215525545263921s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.665147194991185rem; --distance:8.958309792586785rem; --position:48.17719387037901%; --time:3.170507508583344s; --delay:-2.482884604361735s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.464273314303978rem; --distance:7.187435827272001rem; --position:26.237553752835478%; --time:2.9840906846606234s; --delay:-3.676760885764135s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.583311226234236rem; --distance:6.6837277863436rem; --position:95.96397586508756%; --time:3.5007803450689727s; --delay:-2.8765977274938126s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.2738747031742568rem; --distance:7.579028257617642rem; --position:65.25677262505613%; --time:2.9169382339501007s; --delay:-2.6622780581033427s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.657512924743902rem; --distance:8.748791845962783rem; --position:54.59517736056449%; --time:3.9531526261615757s; --delay:-3.6411758983865s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.391349287886531rem; --distance:8.812370644680083rem; --position:75.69451807768716%; --time:3.9334464066582355s; --delay:-2.0207350981078864s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.0849226428216783rem; --distance:8.303769984697102rem; --position:63.007072340206335%; --time:2.474106596412069s; --delay:-2.9068472003315s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.825126824434196rem; --distance:9.033850643445014rem; --position:6.059121828553646%; --time:2.486869787592173s; --delay:-3.6517939460482722s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.022472821729119rem; --distance:8.381693978677948rem; --position:28.92906341291586%; --time:3.3019116970194275s; --delay:-2.9078675772986804s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.23854523492769rem; --distance:6.9709282020557914rem; --position:1.9387867200643498%; --time:2.8474255227405263s; --delay:-2.06154071888475s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.482780913802012rem; --distance:6.611176844866144rem; --position:100.49811993450636%; --time:3.937612811669208s; --delay:-2.3914094563801354s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.6327518865392365rem; --distance:7.030748061031721rem; --position:23.358524726410884%; --time:2.003504753558004s; --delay:-3.6281992363704445s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.7341486195086695rem; --distance:6.388747763745368rem; --position:22.241460868148067%; --time:2.5517090271268446s; --delay:-2.7520306349948602s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.1930590468103848rem; --distance:6.071036533586855rem; --position:68.8467907976903%; --time:3.6331907495459306s; --delay:-2.4343677286873127s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.378433821119226rem; --distance:9.854217099099264rem; --position:-0.9031490320198676%; --time:3.2062946309016684s; --delay:-2.8545029149939958s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.496036486183171rem; --distance:7.004514311604712rem; --position:90.03410175213153%; --time:3.959319688062623s; --delay:-2.5964265872855323s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.25368769211832rem; --distance:6.686653836818188rem; --position:36.2859343850072%; --time:3.2622453965820792s; --delay:-2.913713624180117s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.821615878382568rem; --distance:6.7619528484246505rem; --position:65.92261962037993%; --time:3.30494623144314s; --delay:-3.4676884951591727s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.81918914750608rem; --distance:6.91803584516997rem; --position:54.61719354981138%; --time:2.8775085808507295s; --delay:-2.4792122316804694s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.977513290092855rem; --distance:8.062943950050101rem; --position:79.90955705675957%; --time:2.768450770295875s; --delay:-2.7811014507061733s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.47419115737023rem; --distance:6.628450553127159rem; --position:26.27048545149844%; --time:2.613830371232842s; --delay:-2.9577778548115443s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.532409351518597rem; --distance:7.034598519533367rem; --position:82.1243585270494%; --time:2.005778678026562s; --delay:-2.3842241720427073s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.4092862226733853rem; --distance:8.867403918151496rem; --position:18.364950949468245%; --time:3.3677969416034252s; --delay:-3.846437086510627s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.730306114932345rem; --distance:8.226126098289624rem; --position:26.692225351844666%; --time:3.51424623133719s; --delay:-2.1359986304136074s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.4494517081842693rem; --distance:9.543780176717396rem; --position:42.35650890713553%; --time:2.4516507882675844s; --delay:-2.736228713551116s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.4922538855037963rem; --distance:8.480608760378447rem; --position:12.971867314570819%; --time:3.2095332571794186s; --delay:-2.7176456235798407s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.629084187157596rem; --distance:9.095115880591852rem; --position:30.9600823038692%; --time:2.3910318982494174s; --delay:-2.4287615636005992s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.7224498592577726rem; --distance:7.752654747966639rem; --position:83.84733941891238%; --time:2.245787055797165s; --delay:-3.4037006815062294s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.0936630538726764rem; --distance:7.509097976200367rem; --position:17.166531965621534%; --time:3.872355398409524s; --delay:-3.5902054530617113s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.435679316060146rem; --distance:9.80761367785567rem; --position:12.495947828280471%; --time:3.8694975863469687s; --delay:-3.279820535496553s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.722900217117157rem; --distance:9.316676903214962rem; --position:59.66302086256299%; --time:2.68822958523622s; --delay:-2.314789747941255s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.446239197306369rem; --distance:6.90380623392245rem; --position:43.86447387579939%; --time:3.708775657077861s; --delay:-3.688902723763403s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.7786557437039034rem; --distance:7.707302459957117rem; --position:53.096857890714396%; --time:2.2608467673749693s; --delay:-2.7959550921498217s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.9667866106410843rem; --distance:6.752273276645537rem; --position:5.547289754534052%; --time:3.813073814599266s; --delay:-3.0722869577362695s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.109575223767257rem; --distance:6.09101679095176rem; --position:-0.9721577206271181%; --time:3.2240578086398894s; --delay:-3.971679070665832s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.434279432935803rem; --distance:8.825138485727717rem; --position:64.50005904785482%; --time:2.735872815598906s; --delay:-3.5067961805653756s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.477066636839798rem; --distance:6.31267597214986rem; --position:97.2632797900607%; --time:3.5262206146988846s; --delay:-2.3173720894632384s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.778236080037434rem; --distance:9.019229576766364rem; --position:65.05647433921062%; --time:3.6425151080350027s; --delay:-3.887873530920379s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.567209019944545rem; --distance:9.145254903727672rem; --position:89.5923001900599%; --time:3.8794908281294207s; --delay:-3.0639807326075967s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.899913909347971rem; --distance:9.594431563540859rem; --position:89.65722699790278%; --time:3.5674071189749035s; --delay:-2.1247165455623866s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.443351199921488rem; --distance:8.995481334834636rem; --position:70.64491969857212%; --time:2.4533699059035268s; --delay:-3.5893097533157423s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.4414523488830806rem; --distance:9.110589653704125rem; --position:42.22721648408216%; --time:3.485026855894631s; --delay:-2.9556125790610857s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.9037032082194605rem; --distance:9.693124145005704rem; --position:76.92451429791147%; --time:3.649836422733555s; --delay:-2.612430605924194s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.4359806900511805rem; --distance:6.27217579802087rem; --position:-4.990410562959977%; --time:3.4446849017604886s; --delay:-3.9676616817699126s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.5189878381788926rem; --distance:9.636740777958021rem; --position:100.88993636681415%; --time:3.8532783869564833s; --delay:-3.6918095982193724s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.0184765841962893rem; --distance:8.292776247713721rem; --position:-2.559286777504044%; --time:3.6030609800664424s; --delay:-3.832468779819606s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.3865042906483023rem; --distance:6.111938456274765rem; --position:73.05402554653806%; --time:3.003611373689121s; --delay:-3.665388078407094s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.1697012772888655rem; --distance:8.342740673747018rem; --position:-1.3007300894331375%; --time:2.996422979042176s; --delay:-3.6491598226372757s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.743931895133768rem; --distance:8.029118413732782rem; --position:102.56411953319329%; --time:3.5735189196439134s; --delay:-2.907039947008647s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.8873498546525482rem; --distance:6.008289002495913rem; --position:17.112056591667503%; --time:3.7596568640376353s; --delay:-2.329854481334612s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.7245689134285715rem; --distance:7.4409001326433355rem; --position:43.103650238843485%; --time:2.0219355086233444s; --delay:-3.688054968776074s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.432231548163282rem; --distance:8.692131966237973rem; --position:9.040244819516746%; --time:2.8112430378733726s; --delay:-2.874845780901325s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.260006235095964rem; --distance:9.286728465935047rem; --position:9.878065753115068%; --time:2.4573268391541414s; --delay:-2.6232555731526457s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.8788514387586464rem; --distance:9.94969787307533rem; --position:69.67560621530734%; --time:3.198812433049184s; --delay:-3.420472980865792s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.657877100123141rem; --distance:6.685149170587112rem; --position:1.4416580259316225%; --time:2.594106056898698s; --delay:-3.86490122625873s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.575342786356611rem; --distance:6.377306018509983rem; --position:97.81767111838295%; --time:3.050220833163499s; --delay:-2.941942708293543s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.46430975812137rem; --distance:6.545895352562803rem; --position:4.771547377389808%; --time:2.8909867465027683s; --delay:-3.965694337317503s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.7633781308208736rem; --distance:8.251426747707832rem; --position:7.248676825963056%; --time:2.047153125166724s; --delay:-2.7997842997712796s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.577475318009499rem; --distance:8.056418327258406rem; --position:44.07580005747718%; --time:2.6803530815507797s; --delay:-3.3715816835623533s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.131466599092074rem; --distance:8.923587614627284rem; --position:51.54939127279936%; --time:3.520905727673434s; --delay:-2.931911519258624s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.786339058939645rem; --distance:9.674207058251987rem; --position:97.39705964715725%; --time:3.068427933068145s; --delay:-3.4081403787193336s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.055595635328702rem; --distance:6.890217213500223rem; --position:18.478974514184692%; --time:3.9250454830286943s; --delay:-2.726236727287074s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.8127784106648663rem; --distance:8.589585090594824rem; --position:-1.3163312293709861%; --time:3.8366280256290777s; --delay:-3.9617476692618103s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.0297689771657765rem; --distance:6.511371065447771rem; --position:41.96473749701953%; --time:2.5644433552278336s; --delay:-3.8238410465441977s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.302381370379135rem; --distance:6.463386966861098rem; --position:45.46228445419405%; --time:2.5128310113100993s; --delay:-3.2405058537699394s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.629176004153691rem; --distance:6.1636805477703716rem; --position:71.40492094306607%; --time:2.9318985462931866s; --delay:-3.4028578894517736s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.57432681340323rem; --distance:6.011788769743921rem; --position:24.144178284691897%; --time:3.925595452468756s; --delay:-3.2784824576790736s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.550756318283814rem; --distance:8.605540704649997rem; --position:33.645742184682284%; --time:2.4003471844468987s; --delay:-3.1667006012020407s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.7117281181582875rem; --distance:7.479892921488766rem; --position:36.54220502526093%; --time:2.5865677493138444s; --delay:-2.259109983745021s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.273064485343315rem; --distance:9.803827291608954rem; --position:45.88517740515596%; --time:3.016594654888112s; --delay:-2.680516633586677s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.02505079772463rem; --distance:9.4949207476886rem; --position:5.47149899637944%; --time:2.3616957457201506s; --delay:-3.719942787857683s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.202229076695826rem; --distance:8.725950903696457rem; --position:58.221903304441355%; --time:3.8542863876166398s; --delay:-2.574060252874079s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.024361203752036rem; --distance:7.917314861440931rem; --position:102.54258044256596%; --time:2.7006430266056975s; --delay:-2.9637496105468397s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.9217070789282165rem; --distance:7.910069457486574rem; --position:28.82295235537739%; --time:2.9618759896523077s; --delay:-2.805619793679617s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.325989858926013rem; --distance:7.764787799110117rem; --position:84.83542387198706%; --time:3.7312694755179807s; --delay:-2.2103977411976143s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.744343118446472rem; --distance:6.8866030237632385rem; --position:15.757276344093007%; --time:2.469255258214137s; --delay:-2.306366722482392s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.0599257218588907rem; --distance:6.876124078295454rem; --position:1.4854574434279293%; --time:3.5124800117825177s; --delay:-2.200812778651309s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.337804819822801rem; --distance:9.741564339718474rem; --position:70.02748653817025%; --time:2.9999549967158115s; --delay:-3.949893989559508s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.403505980473244rem; --distance:8.530595544147161rem; --position:2.3981231626462174%; --time:2.2145399262253544s; --delay:-2.727070889730556s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.701297839205396rem; --distance:7.041349625854109rem; --position:28.35696255268543%; --time:3.0504106371367445s; --delay:-2.479191056004878s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.7786714042333625rem; --distance:9.73673970186227rem; --position:44.568251027948385%; --time:3.5105720433903116s; --delay:-2.508090722407199s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.0878903973848084rem; --distance:7.918681260878112rem; --position:101.18869407583972%; --time:3.9042562230753695s; --delay:-3.5852734581198717s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.604776203400796rem; --distance:8.331826197696936rem; --position:88.69475607176572%; --time:3.453941573548553s; --delay:-3.4035977905087935s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.087417029164019rem; --distance:8.778609171318141rem; --position:67.25155528904777%; --time:3.792644259082452s; --delay:-2.1019136471573434s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.191478329537551rem; --distance:6.6250090176102585rem; --position:98.96218887866101%; --time:3.548989802336294s; --delay:-3.005842856163931s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.3176613201979466rem; --distance:7.689237462298261rem; --position:74.92793989013808%; --time:2.390258051383975s; --delay:-2.1760424650007906s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.413372391950025rem; --distance:8.124638101132689rem; --position:71.65675468265043%; --time:3.714231952061829s; --delay:-2.6873493780963753s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.4525958605222895rem; --distance:7.963830453601204rem; --position:17.652844715103907%; --time:2.3978978357962246s; --delay:-2.4056454205211333s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.8315773983117785rem; --distance:7.085730678694741rem; --position:59.93799083557133%; --time:2.4997241326304844s; --delay:-3.2797174557189006s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.429435028233881rem; --distance:6.680952823043821rem; --position:29.918198820333842%; --time:2.2076903286024154s; --delay:-3.189490038520152s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.9599510426285836rem; --distance:9.804260653152163rem; --position:93.45363897887812%; --time:3.0313164166719386s; --delay:-2.4560123341957825s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.5991800278723503rem; --distance:9.38774956173819rem; --position:59.00305220538229%; --time:3.796143689931657s; --delay:-3.1452944013396253s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.4625811184223165rem; --distance:8.321742824428057rem; --position:87.36121371361546%; --time:3.5867780535477976s; --delay:-2.706193513746838s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.5674514568986764rem; --distance:6.938373092996766rem; --position:85.95163823799803%; --time:2.2625295652541895s; --delay:-3.218524554544747s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.198259813377083rem; --distance:7.422221445107981rem; --position:40.338948276574%; --time:2.761990147676643s; --delay:-2.0257964239051818s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.9762555896259473rem; --distance:7.018808595861707rem; --position:5.166819700796905%; --time:2.124338233346518s; --delay:-2.795358536347162s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.056393462697772rem; --distance:9.267533047668064rem; --position:-4.4749142551015115%; --time:2.7938859995997225s; --delay:-3.9340578788393907s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.9504197514824986rem; --distance:6.495917716775699rem; --position:37.57711979168727%; --time:2.9574334678714167s; --delay:-2.966272445589746s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.7728448814428965rem; --distance:9.137858633025267rem; --position:-4.614726650546941%; --time:3.7125103650788955s; --delay:-2.106606206344333s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.0139536083604925rem; --distance:9.886518459748267rem; --position:7.758483742433635%; --time:3.3993981686179784s; --delay:-2.526204330805765s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.3098804421078825rem; --distance:9.929158769493458rem; --position:78.34657225233586%; --time:3.765683375819176s; --delay:-3.775704324899843s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.789371586977688rem; --distance:9.498321559598454rem; --position:94.45886186767922%; --time:2.9450038079183822s; --delay:-2.810137264608652s;">
-          </div>
-          <div class="bubble"
-            style="--size:2.928809710246256rem; --distance:8.61523150580479rem; --position:-4.714154332454974%; --time:2.498415850313819s; --delay:-2.983672919271089s;">
-          </div>
-          <div class="bubble"
-            style="--size:3.5355206139006716rem; --distance:8.048553281859943rem; --position:28.835604855041993%; --time:2.2332655941067827s; --delay:-2.256088602948433s;">
-          </div>
-          <div class="bubble"
-            style="--size:4.319567519123284rem; --distance:6.660310564494152rem; --position:93.00396308130158%; --time:3.5162847156298724s; --delay:-2.3953416539442527s;">
-          </div>
-          <div class="bubble"
-            style="--size:5.507299931668579rem; --distance:9.627049555630299rem; --position:45.38874670772088%; --time:2.8712892410223922s; --delay:-2.551719036289382s;">
-          </div>
-        </div>
-        <div class="content"></div>
-      </div>
-      <svg style="position: fixed; top: 100vh">
-        <defs>
-          <filter id="blob">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="blob">
-            </feColorMatrix>
-            <feComposite in="SourceGraphic" in2="blob" operator="atop"></feComposite>
-          </filter>
-        </defs>
-      </svg>
-      <div class="heading check">
-        <div class="flex flex-row justify-center items-center space-x-8">
-          <a target="_blank" href="https://x.com/flamingwifsol" ><img src="x.svg" class="rounded-full p-4 " width="90" height="40" alt=""></a>
-          <a target="_blank" href="#"><img src="pump.jpg" class="rounded-full p-4 " width="70" height="40" alt=""></a>
-          <a target="_blank" href="https://dexscreener.com/"><img src="dex.png" class="rounded-full p-4 " width="70" height="40" alt=""></a>
-          <a target="_blank" href="https://t.me/flamingwifsol"><img src="tg.svg" class="rounded-full p-4 " width="70" height="40" alt=""></a>
-        </div>
-      </div>
-    </footer>
+    <!-- 
+    <div style="height: 100vh; background-color: #fff;" class="dwag">
+        <h1 style="color: white;">Next Section</h1>
+    </div> -->
 
 
 
-  </div>
 
-  <script>
-    paper.install(window);
 
-    var tool1, tool2;
-    var word = "Don't Jeet!!!";
 
-    function init() {
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script type="module">
 
-      paper.setup('canvas');
+        gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+        // create the smooth scroller FIRST!
+        const smoother = new ScrollSmoother.create({
+        wrapper: "#opening",
+        content: "#opening-img",
+        smooth: 2,
+        speed: 3,
+        effects: false
+        });
 
-      var path = new Path();
-      var points = word.length;
-      var length = word.length;
-      var vw = $(window).width() / 100;
+        smoother.effects(".hero__image-cont", {
+        speed: () => gsap.utils.random(0.55, 0.85, 0.05)
+        });
 
-      var createPointText = function (str, style) {
-        var text = new PointText();
-        text.content = str;
-        text.fillColor = '#000000';
-        if (style) {
-          if (style.font) text.font = style.font;
-          if (style.fontFamily) text.fontFamily = style.fontFamily;
-          if (style.fontSize) text.fontSize = style.fontSize;
-          if (style.fontWeight) text.fontWeight = style.fontWeight;
+        gsap.to(".anim-swipe", {
+        yPercent: 300,
+        delay: 0.2,
+        duration: 3,
+        stagger: {
+        from: "random",
+        each: 0.1
+        },
+        ease: "sine.out"
+        });
+
+        gsap.to(".hero__image-cont > img", {
+        scale: 1.5,
+        xPercent: 20,
+        scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "+=3000px",
+        scrub: true
         }
-        return text;
-      }
+        });
 
-      var start = new paper.Point(Math.random() * 100, Math.random() * 100);
-      for (var i = 0; i < points; i++) {
-        path.add(new paper.Point(i * length + start.x, 0 + start.y));
-        path.smooth();
-      }
+        // Button click and hold functionality
+        const button = document.querySelector('.button1');
+        const smileGrid = document.getElementById('smile-grid');
+        let smileCount = 0;
+        const maxSmiles = 20; // 5x4 grid = 20 smiles
+        let isHolding = false;
+        let holdInterval;
 
-      var createAlignedText = function (str, path, style) {
-        if (str && str.length > 0 && path) {
-          // create PointText object for each glyph
-          var glyphTexts = [];
-          for (var i = 0; i < str.length; i++) {
-            glyphTexts[i] = createPointText(str.substring(i, i + 1), style);
-            glyphTexts[i].justification = "center";
-          }
-          // for each glyph find center xOffset
-          var xOffsets = [0];
-          for (var i = 1; i < str.length; i++) {
-            var pairText = createPointText(str.substring(i - 1, i + 1), style);
-            pairText.remove();
-            xOffsets[i] = xOffsets[i - 1] + pairText.bounds.width -
-              glyphTexts[i - 1].bounds.width / 2 - glyphTexts[i].bounds.width / 2;
-          }
-          // set point for each glyph and rotate glyph aorund the point
-          for (var i = 0; i < str.length; i++) {
-            var centerOffs = xOffsets[i];
-            if (path.length < centerOffs) {
-              if (path.closed) {
-                centerOffs = centerOffs % path.length;
-              } else {
-                centerOffs = undefined;
-              }
+        // Function to create a smile
+        function createSmile() {
+            if (smileCount < maxSmiles) {
+                const smileElement = document.createElement('div');
+                smileElement.textContent = ':)';
+                smileElement.style.color = 'white';
+                smileElement.style.fontSize = '24px';
+                smileElement.style.textAlign = 'center';
+                smileElement.style.padding = '10px';
+                smileElement.style.fontFamily = 'system-ui';
+                smileElement.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+                smileElement.style.borderRadius = '5px';
+                smileGrid.appendChild(smileElement);
+                smileCount++;
+                
+                gsap.fromTo(smileElement, 
+                    { scale: 0, opacity: 0 }, 
+                    { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.7)" }
+                );
             }
-            if (centerOffs === undefined) {
-              glyphTexts[i].remove();
-            } else {
-              var pathPoint = path.getPointAt(centerOffs);
-              glyphTexts[i].point = pathPoint;
-              var tan = path.getTangentAt(centerOffs);
-              glyphTexts[i].rotate(tan.angle, pathPoint);
+        }
+
+        // Mouse events for desktop
+        button.addEventListener('mousedown', () => {
+            if (smileCount < maxSmiles) {
+                isHolding = true;
+                createSmile(); // Create first smile immediately
+                holdInterval = setInterval(createSmile, 200); // Create smile every 200ms while holding
             }
-          }
-        }
-      }
+        });
 
-      tool1 = new Tool();
-      tool1.onMouseMove = function (event) {
-        project.clear();
-        var x, y;
-        path.firstSegment.point = event.point;
-        for (var i = 0; i < points - 1; i++) {
-          var segment = path.segments[i];
-          var nextSegment = segment.next;
-          var vector = new paper.Point(segment.point.x - nextSegment.point.x, segment.point.y - nextSegment.point.y);
-          vector.length = length;
-          nextSegment.point = new paper.Point(segment.point.x - vector.x, segment.point.y - vector.y);
-        }
+        button.addEventListener('mouseup', () => {
+            isHolding = false;
+            if (holdInterval) {
+                clearInterval(holdInterval);
+                holdInterval = null;
+            }
+        });
 
-        path.smooth();
-        path.strokeColor = 'blue';
-        path.smooth({ type: 'continuous' });
+        button.addEventListener('mouseleave', () => {
+            isHolding = false;
+            if (holdInterval) {
+                clearInterval(holdInterval);
+                holdInterval = null;
+            }
+        });
 
-        if ($(window).width() <= 900) {
-          createAlignedText(word, path, {
-            fontSize: vw * 4,
-            fontFamily: 'Arial'
-          });
-        } else {
-          createAlignedText(word, path, {
-            fontSize: vw * 2,
-            fontFamily: 'Caveat'
-          });
-        }
+        // Touch events for mobile
+        button.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (smileCount < maxSmiles) {
+                isHolding = true;
+                createSmile(); // Create first smile immediately
+                holdInterval = setInterval(createSmile, 200); // Create smile every 200ms while holding
+            }
+        });
 
-        path.fullySelected = true;
+        button.addEventListener('touchend', () => {
+            isHolding = false;
+            if (holdInterval) {
+                clearInterval(holdInterval);
+                holdInterval = null;
+            }
+        });
 
-      }
+        button.addEventListener('touchcancel', () => {
+            isHolding = false;
+            if (holdInterval) {
+                clearInterval(holdInterval);
+                holdInterval = null;
+            }
+        });
+    </script>
 
-      tool2 = new Tool();
-      tool2.onMouseMove = function (event) {
+            <script type="module">
+                gsap.registerPlugin(SplitText);
+                let split, animation;
 
-        var path = new Path.Circle(new Point(event.point, event.point), 20);
-        view.onFrame = function (event) {
-          project.clear();
-          createAlignedText("LOADING", path, {
-            fontSize: vw * 3,
-            fontFamily: 'Arial'
-          });
-          path.rotate(5);
-        }
+                function setup() {
+                    split && split.revert();
+                    animation && animation.revert();
+                    split = SplitText.create(".text", { type: "words" });
 
-      }
+                    // Create animation with ScrollTrigger
+                    animation = gsap.from(split.words, {
+                        y: -100,
+                        opacity: 0,
+                        rotation: "random(-80, 80)",
+                        duration: 0.7,
+                        ease: "back",
+                        stagger: 0.15,
+                        scrollTrigger: {
+                            trigger: "#start",
+                            start: "top 80%",
+                            end: "bottom 20%",
+                        }
+                    });
+                }
 
-    }
+                document.fonts.ready.then(() => {
+                    setup();
+                });
+
+                // window.addEventListener("resize", setup);
+            </script>
+
+            <script>
+                window.addEventListener("load", () => {
+                    const SMILE = document.querySelector(".smile");
+                    const EYEWHITE = document.querySelectorAll(".eyewhite");
+                    const BIGSMILE = document.querySelectorAll(".bigsmile");
+                    const NOSMILE = document.querySelector(".nosmile");
+                    const BACK_LINK = document.querySelector(".back-link");
+
+                    const scrollAndSmile = () => {
+                        currentScroll =
+                            window.scrollY /
+                            (document.documentElement.offsetHeight - window.innerHeight);
+                        currentScroll = currentScroll
+                        SMILE.style.opacity = (currentScroll + 0.8);
+
+                        EYEWHITE.forEach((eye) => {
+                            eye.style.opacity = currentScroll + 0.7;
+                        });
+
+                        if (currentScroll > 0.01) {
+                            NOSMILE.style.opacity = "0";
+                            NOSMILE.style.width = "0";
+                        } else {
+                            NOSMILE.style.opacity = "1";
+                            NOSMILE.style.width = "8vmin";
+                        }
+
+                        BIGSMILE.forEach((e) => {
+                            if (currentScroll < 0.01) {
+                                e.style.opacity = "0";
+                                e.style.width = "0";
+                                SMILE.style.opacity = (currentScroll - 0.8)
+                            } else {
+                                e.style.opacity = "1";
+                                e.style.width = "4vmin";
+                            }
+                        });
 
 
-    init();
-    tool1.activate();
-  </script>
-  <script>
-    function spark(event) {
-    let i = document.createElement("i");
-    // Set the position of the element based on the mouse event
-    i.style.left = event.pageX + "px";
-    i.style.top = event.pageY + "px";
-    // Randomly scale the element
-    i.style.transform = `scale(${Math.random() * 2 + 1})`;
-    // Set random transition values
-    i.style.setProperty("--x", getRandomTransitionValue());
-    i.style.setProperty("--y", getRandomTransitionValue());
-    document.body.appendChild(i);
-    // Remove the element after 2 seconds
-    setTimeout(() => {
-        document.body.removeChild(i);
-    }, 2000);
-}
-;
-function getRandomTransitionValue() {
-    // Generate a random value between -200 and 200 pixels
-    return `${Math.random() * 400 - 200}px`;
-}
-// Add event listener to track mouse movements and create spark effect
-document.addEventListener("mousemove", spark);
-  </script>
+                    };
+
+                    window.addEventListener("scroll", scrollAndSmile);
+                });
+
+            </script>
+
+            <script>
+                var quadrantItems = document.querySelectorAll('.quadrant__item');
+                var svgs = document.querySelectorAll('svg');
+                var cube = document.querySelector('.cube');
+                var closeButton = document.querySelector('.quadrant__item__content--close');
+                var isInside = false;
+
+                var tl = new TimelineLite({ paused: false });
+                tl.timeScale(1.6);
+
+                tl.to('.cube', 0.4, { rotation: 45, width: '120px', height: '120px', ease: Expo.easeOut }, 'first');
+                tl.to('.plus .plus-vertical', 0.3, { height: '0', backgroundColor: '#f45c41', ease: Power1.easeIn }, 'first');
+                tl.to('.plus .plus-horizontal', 0.3, { width: '0', backgroundColor: '#f45c41', ease: Power1.easeIn }, 'first');
+                tl.to('.cube', 0, { backgroundColor: 'transparent' });
+                tl.to(quadrantItems[0], 0.15, { x: -5, y: -5 }, 'seperate');
+                // tl.to('.arrow-up', 0.2, { opacity: 1, y: 0 }, 'seperate+=0.2');
+                tl.to(quadrantItems[1], 0.15, { x: 5, y: -5 }, 'seperate');
+                // tl.to('.arrow-right', 0.2, { opacity: 1, x: 0 }, 'seperate+=0.2');
+                tl.to(quadrantItems[3], 0.15, { x: 5, y: 5 }, 'seperate');
+                // tl.to('.arrow-down', 0.2, { opacity: 1, y: 0 }, 'seperate+=0.2');
+                tl.to(quadrantItems[2], 0.15, { x: -5, y: 5 }, 'seperate');
+                // tl.to('.arrow-left', 0.2, { opacity: 1, x: 0 }, 'seperate+=0.2');
+
+                // cube.addEventListener('mouseenter', playTimeline);
+                // cube.addEventListener('mouseleave', reverseTimeline);
+
+
+            </script>
+
+            <script>
+                // function color() {
+                //     return 'hsl(' + Math.random() * 360 + 'deg,75%,50%)'
+                // }
+                function color() {
+                    // Define hue ranges: complementary (200-240°) or analogous (20-70°)
+                    const hueRanges = [
+                        { min: 20, max: 40 }, // Complementary: blue-purple
+                        { min: 20, max: 70 }    // Analogous: yellow-orange
+                    ];
+                    const range = hueRanges[Math.floor(Math.random() * hueRanges.length)];
+                    const hue = Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+                    const saturation = Math.floor(Math.random() * (90 - 60 + 1)) + 60; // 60-90%
+                    const lightness = Math.floor(Math.random() * (70 - 40 + 1)) + 40;  // 40-70%
+                    return `hsl(${hue}deg,${saturation}%,${lightness}%)`;
+                }
+
+                // followers = 200
+                // for (var i = 0; i < followers; i++) {
+                //     var d = document.querySelector('.faces')
+                //     // var f = d.appendChild('div')
+                //     var f = document.createElement('div')
+                //     f.className = 'follower'
+                //     f.innerHTML = '&#x263B;'
+                //     f.style.color = color()
+                //     f.onmouseenter = function (e) {
+                //         var x = Math.random() < .5 ? (Math.random() * 100) + 200 : (-1) * ((Math.random() * 100) + 200)
+                //         var y = Math.random() < .5 ? (Math.random() * 100) + 200 : (-1) * ((Math.random() * 100) + 200)
+                //         this.style.transform = 'translate(' + x + '%,' + y + '%) rotate(' + Math.random() * 720 + 'deg) scale(' + (.5 + (Math.random() * 3)) + ')'
+                //     }
+                //     d.appendChild(f)
+                // }
+
+                                 // Check if user is on mobile
+                 function isMobile() {
+                     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                            window.innerWidth <= 768;
+                 }
+
+                 if (isMobile()) {
+                for (var i = 0; i < 70; i++) {
+                    var d = document.querySelector('.faces')
+                    // var f = d.appendChild('div')
+                    var f = document.createElement('div')
+                    f.className = 'follower'
+                    f.innerHTML = '&#x263B;'
+                    f.style.color = color()
+                    f.onmouseenter = function (e) {
+                        var x = Math.random() < .5 ? (Math.random() * 100) + 200 : (-1) * ((Math.random() * 100) + 200)
+                        var y = Math.random() < .5 ? (Math.random() * 100) + 200 : (-1) * ((Math.random() * 100) + 200)
+                        this.style.transform = 'translate(' + x + '%,' + y + '%) rotate(' + Math.random() * 720 + 'deg) scale(' + (.5 + (Math.random() * 3)) + ')'
+                    }
+                    d.appendChild(f)
+                }
+                 }
+                 else {
+                for (var i = 0; i < 180; i++) {
+                    var d = document.querySelector('.faces')
+                    // var f = d.appendChild('div')
+                    var f = document.createElement('div')
+                    f.className = 'follower'
+                    f.innerHTML = '&#x263B;'
+                    f.style.color = color()
+                    f.onmouseenter = function (e) {
+                        var x = Math.random() < .5 ? (Math.random() * 100) + 200 : (-1) * ((Math.random() * 100) + 200)
+                        var y = Math.random() < .5 ? (Math.random() * 100) + 200 : (-1) * ((Math.random() * 100) + 200)
+                        this.style.transform = 'translate(' + x + '%,' + y + '%) rotate(' + Math.random() * 720 + 'deg) scale(' + (.5 + (Math.random() * 3)) + ')'
+                    }
+                    d.appendChild(f)
+                }
+                 }
+                 
+                 // Handle click events for mobile users
+                 var clicked = false;
+                 var facesDiv = document.querySelector('.faces')
+                 facesDiv.addEventListener('click', function (e) {
+                     if (isMobile()) {
+                        
+                         // For mobile users, trigger randomization on click
+                         var fs = document.querySelectorAll('.follower')
+                         if(clicked) {
+                            fs.forEach(function (elm) {
+                             elm.style.transform = 'none'
+                            })
+                            clicked = false;
+                         }else{
+                         fs.forEach(function (elm) {
+                             var x = Math.random() < .5 ? (Math.random() * 100) + 200 : (-1) * ((Math.random() * 100) + 200)
+                             var y = Math.random() < .5 ? (Math.random() * 100) + 200 : (-1) * ((Math.random() * 100) + 200)
+                             elm.style.transform = 'translate(' + x + '%,' + y + '%) rotate(' + Math.random() * 720 + 'deg) scale(' + (.5 + (Math.random() * 2)) + ')'
+                             clicked = true;
+                         })
+                        }
+                     } else {
+                         // For desktop users, reset all followers to original position
+                         var fs = document.querySelectorAll('.follower')
+                         fs.forEach(function (elm) {
+                             elm.style.transform = 'none'
+                         })
+                     }
+                 })
+            </script>
 </body>
 
 </html>
